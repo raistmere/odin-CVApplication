@@ -16,7 +16,8 @@ export function GeneralSection() {
         setIsEdit((prevState) => !prevState);
     }
 
-    // This method changes the state for data
+    // This method changes the state for data by receiving form data
+    // and extracting values needed to update data.
     const changeData = (newData) => {
         // Prevent default submission and stop reloading the page
         newData.preventDefault();
@@ -66,7 +67,7 @@ export function GeneralSection() {
                         </div>
                         <div className='inputBox'>
                             <label htmlFor="phone">Phone Number: </label>
-                            <input type="tel" name='phone' defaultValue={data.phone}/>
+                            <input type="text" name='phone' defaultValue={data.phone}/>
                         </div>
                     </div>
                     <button type='submit' className='submitButton'>Submit</button>
