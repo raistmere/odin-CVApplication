@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/PracticalSection.module.css';
+import { v4 as uuidv4 } from "uuid";
 
 // 
 // This component handles the general section of the CV application
@@ -10,9 +11,9 @@ export function PracticalSection() {
 
     // This state holds the data that will keep track of user's information
     const [data, setData] = useState([
-        {name:"Simba", position:"Chef", desc:"Cook food", startDate:"1/1/1", leaveDate:"2/2/2"},
-        {name:"Zimba", position:"Cop", desc:"Catch Robbers", startDate:"1/1/1", leaveDate:"2/2/2"},
-        {name:"Jimba", position:"Robber", desc:"Rob banks", startDate:"1/1/1", leaveDate:"2/2/2"},
+        {id: uuidv4(), name:"Simba", position:"Chef", desc:"Cook food", startDate:"1/1/1", leaveDate:"2/2/2"},
+        {id: uuidv4(), name:"Zimba", position:"Cop", desc:"Catch Robbers", startDate:"1/1/1", leaveDate:"2/2/2"},
+        {id: uuidv4(), name:"Jimba", position:"Robber", desc:"Rob banks", startDate:"1/1/1", leaveDate:"2/2/2"},
     ]);
 
     // This method changes the state for isEdit
@@ -36,6 +37,7 @@ export function PracticalSection() {
         let newData = [];
         fieldsetArray.forEach(fieldset => {
             newData.push({
+                    id: fieldset.getAttribute("data-key"),
                     name: fieldset.elements.name.value, 
                     position: fieldset.elements.position.value, 
                     desc: fieldset.elements.desc.value,
@@ -59,7 +61,7 @@ export function PracticalSection() {
         let newData = retrieveData(formData);
         // Add a new education data object to the existing newData
         console.log("Before Add: ", newData);
-        newData.push({name:"", email: "", phone:""});
+        newData.push({id: uuidv4(), name:"", position:"", desc:"", startDate:"", leaveDate:""});
         console.log("After Add: ", newData);
         // Once we have the correct newData from the formData, we want to go ahead
         // and replace the state: data with the newData.
@@ -108,7 +110,7 @@ export function PracticalSection() {
         let infoBoxArray = []
         data.forEach(element => {
             infoBoxArray.push(
-                <fieldset className={styles.infoGroup}>
+                <fieldset key={element.id} data-key={element.id} className={styles.infoGroup}>
                     <legend>Practical Experience #???</legend>
                     <h2 className={styles.infoField}>Company name: {element.name}</h2>
                     <h2 className={styles.infoField}>Position Title: {element.position}</h2>
@@ -137,7 +139,7 @@ export function PracticalSection() {
         let infoBoxArray = []
         data.forEach(element => {
             infoBoxArray.push(
-                <fieldset className={styles.inputGroup}>
+                <fieldset key={element.id} data-key={element.id} className={styles.inputGroup}>
                     <legend>Practical Experience #???</legend>
                     <div className={styles.inputBox}>
                         <label htmlFor="name" className={styles.labelField}>Company name: </label>

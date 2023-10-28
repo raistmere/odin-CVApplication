@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/EducationSection.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 // 
 // This component handles the general section of the CV application
@@ -10,10 +11,10 @@ export function EducationSection() {
 
     // This state holds the data that will keep track of user's information
     const [data, setData] = useState([
-        {name:"Simba", email:"simba@host.com", phone: 1112223333},
-        {name:"Jimba", email:"jimba@host.com", phone: 1112223333},
-        {name:"Zimba", email:"zimba@host.com", phone: 1112223333},
-        {name:"Ximba", email:"zimba@host.com", phone: 1112223333},
+        {id: uuidv4(), name:"Simba", email:"simba@host.com", phone: 1112223333},
+        {id: uuidv4(), name:"Jimba", email:"jimba@host.com", phone: 1112223333},
+        {id: uuidv4(), name:"Zimba", email:"zimba@host.com", phone: 1112223333},
+        {id: uuidv4(), name:"Ximba", email:"zimba@host.com", phone: 1112223333},
     ]);
 
     // This method changes the state for isEdit
@@ -37,6 +38,7 @@ export function EducationSection() {
         let newData = [];
         fieldsetArray.forEach(fieldset => {
             newData.push({
+                    id: fieldset.getAttribute("data-key"),
                     name: fieldset.elements.name.value, 
                     email: fieldset.elements.email.value, 
                     phone: fieldset.elements.phone.value
@@ -58,7 +60,7 @@ export function EducationSection() {
         let newData = retrieveData(formData);
         // Add a new education data object to the existing newData
         console.log("Before Add: ", newData);
-        newData.push({name:"", email: "", phone:""});
+        newData.push({id: uuidv4(), name:"", email: "", phone:""});
         console.log("After Add: ", newData);
         // Once we have the correct newData from the formData, we want to go ahead
         // and replace the state: data with the newData.
@@ -107,7 +109,7 @@ export function EducationSection() {
         let infoBoxArray = []
         data.forEach(element => {
             infoBoxArray.push(
-                <fieldset className={styles.infoGroup}>
+                <fieldset key={element.id} data-key={element.id} className={styles.infoGroup}>
                     <legend>Education #???</legend>
                     <h2 className={styles.infoField}>School name: {element.name}</h2>
                     <h2 className={styles.infoField}>Type of study: {element.email}</h2>
@@ -134,7 +136,7 @@ export function EducationSection() {
         let infoBoxArray = []
         data.forEach(element => {
             infoBoxArray.push(
-                <fieldset className={styles.inputGroup}>
+                <fieldset key={element.id} data-key={element.id} className={styles.inputGroup}>
                     <legend>Education #???</legend>
                     <div className={styles.inputBox}>
                         <label htmlFor="name" className={styles.labelField}>School name: </label>
