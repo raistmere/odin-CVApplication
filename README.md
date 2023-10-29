@@ -4,4 +4,4 @@ The Odin Project - Project: CV Application
 # Using React + Vite
 
 # Preview Site
-raistmere-cvapplication.netlify.app
+This site was built using [Netlify](https://raistmere-cvapplication.netlify.app).
